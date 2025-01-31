@@ -1,37 +1,68 @@
-import java.util.Vector; //vectores se parece a arraylist
+//import java.util.Vector; //vectores se parece a arraylist
+import java.util.Arrays;
 
-public class Module implements StackInterface<Integer> {
-    // leer .txt = linea por linea tiene que leer el postfix y hacer la operacion
-    // solo se usan enteros positivos y operadores aritmeticos +, -, *, /, %
-    // el stack(echo con un vector) se muestra despues de cada operacion
-    // stack crece hacia la derecha
-    Vector<Integer> stack = new Vector<>();
-    
-    public void sizeSetter(int size) {
-        stack.setSize(size);
-    }
-    
-    @Override
-    public void push(Integer elemento) {
-        stack.add(elemento);
-    }
+public class Module<T> implements StackInterface<T> {
+    // creditos a ricardo
 
-    @Override
-    public Integer pop() {
-        return stack.remove(stack.size()-1);
+    private T[] Stack;
+    private int capacidad;
+    private int cantidad;
+
+    public void VectorStack()
+    {
+        capacidad = 8;
+        Stack = (T[]) new Object[capacidad];
+        cantidad = -1;
     }
 
     @Override
-    public int size() {
-        return stack.size();
-    }
-    @Override
-    public boolean isEmpty() {
-        return stack.isEmpty();
+    public void push(T caracter)
+    {
+        if (cantidad + 1 == capacidad)
+        {
+            AumentarCapacidad();
+        }
+        cantidad++;
+        Stack[cantidad] = caracter;
     }
 
     @Override
-    public void AumentarCapacidad() {
-        stack.setSize(stack.size()*2);
+    public T pop()
+    {
+        if (this.isEmpty())
+        {
+            throw new IllegalStateException("Stack vacío.");
+        }
+        T caracter = this.Stack[cantidad];
+        this.Stack[cantidad] = null;
+        cantidad--;
+        return caracter;
     }
+
+    @Override
+    public boolean isEmpty()
+    {
+        if (this.size()==0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public int size()
+    {
+        return this.cantidad + 1;
+    }
+
+    @Override
+    public void AumentarCapacidad()
+    {
+        this.capacidad = 2 * this.capacidad;
+        this.Stack = Arrays.copyOf(this.Stack, this.capacidad);
+    }
+
 }
