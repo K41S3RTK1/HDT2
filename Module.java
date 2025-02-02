@@ -1,68 +1,48 @@
-//import java.util.Vector; //vectores se parece a arraylist
 import java.util.Arrays;
 
 public class Module<T> implements StackInterface<T> {
-    // creditos a ricardo
-
     private T[] Stack;
     private int capacidad;
     private int cantidad;
 
-    public void VectorStack()
-    {
+    public Module() {
         capacidad = 8;
         Stack = (T[]) new Object[capacidad];
         cantidad = -1;
     }
 
     @Override
-    public void push(T caracter)
-    {
-        if (cantidad + 1 == capacidad)
-        {
-            AumentarCapacidad();
+    public void push(T elemento) {
+        if (cantidad + 1 == capacidad) {
+            aumentarCapacidad();
         }
         cantidad++;
-        Stack[cantidad] = caracter;
+        Stack[cantidad] = elemento;
     }
 
     @Override
-    public T pop()
-    {
-        if (this.isEmpty())
-        {
+    public T pop() {
+        if (isEmpty()) {
             throw new IllegalStateException("Stack vacío.");
         }
-        T caracter = this.Stack[cantidad];
-        this.Stack[cantidad] = null;
+        T elemento = Stack[cantidad];
+        Stack[cantidad] = null;
         cantidad--;
-        return caracter;
+        return elemento;
     }
 
     @Override
-    public boolean isEmpty()
-    {
-        if (this.size()==0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+    public boolean isEmpty() {
+        return cantidad == -1;
     }
 
     @Override
-    public int size()
-    {
-        return this.cantidad + 1;
+    public int size() {
+        return cantidad + 1;
     }
 
-    @Override
-    public void AumentarCapacidad()
-    {
-        this.capacidad = 2 * this.capacidad;
-        this.Stack = Arrays.copyOf(this.Stack, this.capacidad);
+    private void aumentarCapacidad() {
+        capacidad *= 2;
+        Stack = Arrays.copyOf(Stack, capacidad);
     }
-
 }
