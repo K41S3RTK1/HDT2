@@ -1,9 +1,15 @@
 import java.util.Vector;
 
-
+/**
+ * Implementación de una pila utilizando la clase Vector.
+ * @param <T> Tipo de elementos almacenados en la pila.
+ */
 public class VectorStack<T> implements StackInterface<T> {
     private Vector<T> stack;
 
+    /**
+     * Constructor que inicializa la pila basada en un Vector.
+     */
     public VectorStack() {
         stack = new Vector<>();
     }

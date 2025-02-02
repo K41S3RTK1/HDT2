@@ -1,10 +1,17 @@
 import java.util.Arrays;
 
+/**
+ * Implementación de una pila basada en un array dinámico.
+ * @param <T> Tipo de elementos almacenados en la pila.
+ */
 public class Module<T> implements StackInterface<T> {
     private T[] Stack;
     private int capacidad;
     private int cantidad;
 
+    /**
+     * Constructor que inicializa la pila con capacidad de 8 elementos.
+     */
     public Module() {
         capacidad = 8;
         Stack = (T[]) new Object[capacidad];
@@ -41,6 +48,9 @@ public class Module<T> implements StackInterface<T> {
         return cantidad + 1;
     }
 
+    /**
+     * Duplica la capacidad del array cuando está lleno.
+     */
     private void aumentarCapacidad() {
         capacidad *= 2;
         Stack = Arrays.copyOf(Stack, capacidad);

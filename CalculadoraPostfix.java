@@ -1,15 +1,26 @@
 import java.util.StringTokenizer;
 
-
-// Clase que evalúa expresiones matemáticas en notación Postfix.
-
+/**
+ * Clase que evalúa expresiones matemáticas en notación Postfix.
+ */
 public class CalculadoraPostfix {
     private StackInterface<Integer> stack;
 
+    /**
+     * Constructor que recibe una pila para almacenar los operandos.
+     * @param stack Implementación de la pila a utilizar.
+     */
     public CalculadoraPostfix(StackInterface<Integer> stack) {
         this.stack = stack;
     }
 
+    /**
+     * Evalúa una expresión en notación Postfix.
+     * @param expresion La expresión Postfix a evaluar.
+     * @return El resultado de la evaluación.
+     * @throws ArithmeticException Si se intenta una división por cero.
+     * @throws IllegalArgumentException Si se encuentra un operador inválido.
+     */
     public int evaluar(String expresion) {
         StringTokenizer tokens = new StringTokenizer(expresion);
         
